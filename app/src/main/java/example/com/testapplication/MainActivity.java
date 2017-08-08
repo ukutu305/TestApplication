@@ -1,14 +1,11 @@
 package example.com.testapplication;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener {
-
-    private Handler handler = new Handler();
+public class MainActivity extends AppCompatActivity {
 
     private FullScreen fullScreen;
 
@@ -19,9 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnSystemUiVi
 
         View view = getWindow().getDecorView();
 
-        view.setOnSystemUiVisibilityChangeListener(this);
-
-        fullScreen = new FullScreen(handler, view);
+        fullScreen = new FullScreen(this);
 
         fullScreen.startFullScreen();
 
@@ -32,10 +27,5 @@ public class MainActivity extends AppCompatActivity implements View.OnSystemUiVi
             public void onClick(View view) {
             }
         });
-    }
-
-    @Override
-    public void onSystemUiVisibilityChange(int visibility) {
-        fullScreen.startFullScreen(visibility);
     }
 }

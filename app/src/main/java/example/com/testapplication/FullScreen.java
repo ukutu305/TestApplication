@@ -1,8 +1,8 @@
 package example.com.testapplication;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.os.Build;
-import android.os.Handler;
 import android.view.View;
 
 /**
@@ -11,24 +11,12 @@ import android.view.View;
  */
 class FullScreen {
 
-    private final Handler handler;
-
     private final View view;
 
     private final int visibility;
 
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (view != null) {
-                view.setSystemUiVisibility(visibility);
-            }
-        }
-    };
-
-    FullScreen(Handler handler, View view) {
-        this.handler = handler;
-        this.view = view;
+    FullScreen(Activity activity) {
+        this.view = activity.getWindow().getDecorView();
         int apiInt = Build.VERSION.SDK_INT;
         if (apiInt >= Build.VERSION_CODES.KITKAT) {
             visibility = getVisibilityKitkat();
@@ -53,16 +41,15 @@ class FullScreen {
     }
 
     void startFullScreen() {
-        if (handler != null) {
-            handler.post(runnable);
+        if (view != null) {
+            view.setSystemUiVisibility(visibility);
         }
     }
 
     void startFullScreen(int nowVisibility) {
         if ((nowVisibility != visibility)
-                && (handler != null)
-                && (visibility != 0)) {
-            handler.post(runnable);
+                && (view != null)) {
+            view.setSystemUiVisibility(visibility);
         }
     }
 }
