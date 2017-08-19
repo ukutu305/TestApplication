@@ -2,30 +2,23 @@ package example.com.testapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private FullScreen fullScreen;
 
+    private ScreenTransition screenTransition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        View view = getWindow().getDecorView();
+        setContentView(R.layout.main);
 
         fullScreen = new FullScreen(this);
-
         fullScreen.startFullScreen();
 
-        final Button button = (Button) findViewById(R.id.button);
+        screenTransition = new ScreenTransition(this);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+        screenTransition.moveScreen("OpeningFragment");
     }
 }
