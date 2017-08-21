@@ -13,10 +13,12 @@ import android.view.ViewGroup;
  */
 public class IntroductionFragment extends ScreenFragment {
 
-    Runnable moveScreenMenuRunnable = new Runnable() {
+    private Handler handler;
+
+    private Runnable moveScreenMenuRunnable = new Runnable() {
         @Override
         public void run() {
-            getScreenTransition().moveScreen("MenuFragment");
+            getScreenTransition().show("MenuFragment");
         }
     };
 
@@ -30,11 +32,14 @@ public class IntroductionFragment extends ScreenFragment {
     @Override
     public void onResume() {
         super.onResume();
-        moveScreenMenu();
+        handler = new Handler();
+        handler.postDelayed(moveScreenMenuRunnable, 5000);
     }
 
-    private void moveScreenMenu() {
-        Handler handler = new Handler();
-        handler.postDelayed(moveScreenMenuRunnable, 5000);
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (handler != null)
+            handler.removeCallbacks(moveScreenMenuRunnable);
     }
 }

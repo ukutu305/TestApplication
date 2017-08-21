@@ -13,10 +13,12 @@ import android.view.ViewGroup;
  */
 public class OpeningFragment extends ScreenFragment {
 
+    private Handler handler;
+
     private Runnable moveScreenStartRunnable = new Runnable() {
         @Override
         public void run() {
-            getScreenTransition().moveScreen("StartFragment");
+            getScreenTransition().show("StartFragment");
         }
     };
 
@@ -30,11 +32,14 @@ public class OpeningFragment extends ScreenFragment {
     @Override
     public void onResume() {
         super.onResume();
-        moveScreenStart();
+        handler = new Handler();
+        handler.postDelayed(moveScreenStartRunnable, 5000);
     }
 
-    private void moveScreenStart() {
-        Handler handler = new Handler();
-        handler.postDelayed(moveScreenStartRunnable, 5000);
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (handler != null)
+            handler.removeCallbacks(moveScreenStartRunnable);
     }
 }

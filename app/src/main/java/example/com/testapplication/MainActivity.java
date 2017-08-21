@@ -9,16 +9,69 @@ public class MainActivity extends AppCompatActivity {
 
     private ScreenTransition screenTransition;
 
+    private String screenKeySaveInstanceState;
+
+    private String screenKeyOnPause;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+    }
 
-        fullScreen = new FullScreen(this);
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            screenKeySaveInstanceState = savedInstanceState.getString("screenKeySaveInstanceState");
+        } else {
+            screenKeySaveInstanceState = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (fullScreen == null)
+            fullScreen = new FullScreen(this);
+
         fullScreen.startFullScreen();
 
-        screenTransition = new ScreenTransition(this);
+        if (screenTransition == null)
+            screenTransition = new ScreenTransition(this);
 
-        screenTransition.moveScreen("OpeningFragment");
+        if (screenKeySaveInstanceState != null) {
+            screenTransition.show(screenKeySaveInstanceState);
+        } else if (screenKeyOnPause != null) {
+            screenTransition.show(screenKeyOnPause);
+        } else {
+            screenTransition.show("OpeningFragment");
+        }
+        screenKeySaveInstanceState = null;
+        screenKeyOnPause = null;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (screenTransition != null) {
+            screenKeyOnPause = screenTransition.getKey();
+            screenTransition.clear();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (screenTransition != null)
+            outState.putString("screenKeySaveInstanceState", screenTransition.getKey());
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (screenTransition != null)
+            screenTransition.clearKey();
     }
 }

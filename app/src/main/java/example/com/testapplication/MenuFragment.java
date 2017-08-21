@@ -15,7 +15,7 @@ public class MenuFragment extends ScreenFragment {
     private View.OnClickListener onClickListenerSettings = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getScreenTransition().moveScreen("SettingFragment");
+            getScreenTransition().show("SettingFragment");
         }
     };
 

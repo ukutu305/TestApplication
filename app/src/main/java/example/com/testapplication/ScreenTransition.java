@@ -11,7 +11,7 @@ import java.util.Map;
  * 画面遷移のクラス
  * Created by ukutu305 on 2017/08/19.
  */
-class ScreenTransition implements MoveScreen {
+class ScreenTransition implements ScreenControl {
 
     private FragmentManager fragmentManager;
 
@@ -27,7 +27,7 @@ class ScreenTransition implements MoveScreen {
 
     private SettingFragment settingFragment = new SettingFragment();
 
-    private String simpleClassName;
+    private String key;
 
     private Activity activity;
 
@@ -58,20 +58,39 @@ class ScreenTransition implements MoveScreen {
     }
 
     @Override
-    public void moveScreen(String simpleClassName) {
-        if (!map.containsKey(simpleClassName))
+    public void show(String key) {
+        if (!map.containsKey(key))
             return;
 
-        if (this.simpleClassName == null) {
+        if (this.key == null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.container, map.get(simpleClassName));
+            fragmentTransaction.add(R.id.container, map.get(key));
             fragmentTransaction.commit();
-            this.simpleClassName = simpleClassName;
-        } else if (!simpleClassName.equals(this.simpleClassName)) {
+            this.key = key;
+        } else if (!key.equals(this.key)) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, map.get(simpleClassName));
+            fragmentTransaction.replace(R.id.container, map.get(key));
             fragmentTransaction.commit();
-            this.simpleClassName = simpleClassName;
+            this.key = key;
         }
+    }
+
+    @Override
+    public void clear() {
+        if (key == null)
+            return;
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(map.get(key));
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public void clearKey() {
+        key = null;
     }
 }
