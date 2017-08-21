@@ -3,6 +3,9 @@ package example.com.testapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import example.com.testapplication.screen.FullScreen;
+import example.com.testapplication.screen.ScreenTransition;
+
 public class MainActivity extends AppCompatActivity {
 
     private FullScreen fullScreen;

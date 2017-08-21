@@ -1,4 +1,4 @@
-package example.com.testapplication;
+package example.com.testapplication.screen;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -7,11 +7,13 @@ import android.app.FragmentTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
+import example.com.testapplication.R;
+
 /**
  * 画面遷移のクラス
  * Created by ukutu305 on 2017/08/19.
  */
-class ScreenTransition implements ScreenControl {
+public class ScreenTransition implements ScreenControl {
 
     private FragmentManager fragmentManager;
 
@@ -31,7 +33,7 @@ class ScreenTransition implements ScreenControl {
 
     private Activity activity;
 
-    ScreenTransition(Activity activity) {
+    public ScreenTransition(Activity activity) {
 
         putMapFragment(openingFragment);
         putMapFragment(startFragment);

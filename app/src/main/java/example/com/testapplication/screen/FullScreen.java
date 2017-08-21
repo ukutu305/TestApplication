@@ -1,4 +1,4 @@
-package example.com.testapplication;
+package example.com.testapplication.screen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -9,13 +9,13 @@ import android.view.View;
  * アプリケーションをフルスクリーン表示にするクラス
  * Created by ukutu305 on 2017/08/07.
  */
-class FullScreen {
+public class FullScreen {
 
     private final View view;
 
     private final int visibility;
 
-    FullScreen(Activity activity) {
+    public FullScreen(Activity activity) {
         this.view = activity.getWindow().getDecorView();
         int apiInt = Build.VERSION.SDK_INT;
         if (apiInt >= Build.VERSION_CODES.KITKAT) {
@@ -40,13 +40,13 @@ class FullScreen {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 
-    void startFullScreen() {
+    public void startFullScreen() {
         if (view != null) {
             view.setSystemUiVisibility(visibility);
         }
     }
 
-    void startFullScreen(int nowVisibility) {
+    public void startFullScreen(int nowVisibility) {
         if ((nowVisibility != visibility)
                 && (view != null)) {
             view.setSystemUiVisibility(visibility);

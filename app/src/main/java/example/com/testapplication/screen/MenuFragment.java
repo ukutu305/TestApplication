@@ -1,10 +1,12 @@
-package example.com.testapplication;
+package example.com.testapplication.screen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import example.com.testapplication.R;
 
 /**
  * メニュー画面フラグメントのクラス

@@ -1,4 +1,4 @@
-package example.com.testapplication;
+package example.com.testapplication.screen;
 
 /**
  * 画面制御のインターフェース
