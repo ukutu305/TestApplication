@@ -32,12 +32,13 @@ public class StartFragment extends ScreenFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.start, container, false);
+    }
 
-        View view = inflater.inflate(R.layout.start, container, false);
-
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.start_button_continue).setOnClickListener(onClickListenerContinue);
         view.findViewById(R.id.start_button_new_game).setOnClickListener(onClickListenerNewGame);
-
-        return view;
     }
 }
