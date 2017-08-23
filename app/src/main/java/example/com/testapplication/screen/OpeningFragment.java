@@ -20,7 +20,7 @@ public class OpeningFragment extends ScreenFragment {
     private Runnable moveScreenStartRunnable = new Runnable() {
         @Override
         public void run() {
-            getScreenTransition().show("StartFragment");
+            getScreenTransition().show(ScreenFragmentEnum.START.getKey());
         }
     };
 

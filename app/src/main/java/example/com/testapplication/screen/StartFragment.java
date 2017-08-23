@@ -17,14 +17,14 @@ public class StartFragment extends ScreenFragment {
     private View.OnClickListener onClickListenerContinue = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getScreenTransition().show("MenuFragment");
+            getScreenTransition().show(ScreenFragmentEnum.MENU.getKey());
         }
     };
 
     private View.OnClickListener onClickListenerNewGame = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getScreenTransition().show("IntroductionFragment");
+            getScreenTransition().show(ScreenFragmentEnum.INTRODUCTION.getKey());
         }
     };
 

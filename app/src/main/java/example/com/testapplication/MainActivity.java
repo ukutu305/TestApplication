@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import example.com.testapplication.screen.FullScreen;
+import example.com.testapplication.screen.ScreenFragmentEnum;
 import example.com.testapplication.screen.ScreenTransition;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (screenKeyOnPause != null) {
             screenTransition.show(screenKeyOnPause);
         } else {
-            screenTransition.show("OpeningFragment");
+            screenTransition.show(ScreenFragmentEnum.OPENING.getKey());
         }
         screenKeySaveInstanceState = null;
         screenKeyOnPause = null;

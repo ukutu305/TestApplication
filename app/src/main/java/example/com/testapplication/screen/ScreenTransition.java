@@ -19,27 +19,15 @@ public class ScreenTransition implements ScreenControl {
 
     private Map<String, ScreenFragment> map = new HashMap<>();
 
-    private OpeningFragment openingFragment = new OpeningFragment();
-
-    private StartFragment startFragment = new StartFragment();
-
-    private IntroductionFragment introductionFragment = new IntroductionFragment();
-
-    private MenuFragment menuFragment = new MenuFragment();
-
-    private SettingFragment settingFragment = new SettingFragment();
-
     private String key;
 
     private Activity activity;
 
     public ScreenTransition(Activity activity) {
 
-        putMapFragment(openingFragment);
-        putMapFragment(startFragment);
-        putMapFragment(introductionFragment);
-        putMapFragment(menuFragment);
-        putMapFragment(settingFragment);
+        for (ScreenFragmentEnum screenFragmentEnum : ScreenFragmentEnum.values()) {
+            putMapFragment(screenFragmentEnum.getScreenFragment());
+        }
 
         this.activity = activity;
 

@@ -20,7 +20,7 @@ public class IntroductionFragment extends ScreenFragment {
     private Runnable moveScreenMenuRunnable = new Runnable() {
         @Override
         public void run() {
-            getScreenTransition().show("MenuFragment");
+            getScreenTransition().show(ScreenFragmentEnum.MENU.getKey());
         }
     };
 
