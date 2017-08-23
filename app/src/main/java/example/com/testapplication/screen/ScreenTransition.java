@@ -45,6 +45,8 @@ public class ScreenTransition implements ScreenControl {
 
         fragmentManager = activity.getFragmentManager();
 
+        key = null;
+
         initializeScreenFragments();
     }
 
@@ -89,10 +91,5 @@ public class ScreenTransition implements ScreenControl {
     @Override
     public String getKey() {
         return key;
-    }
-
-    @Override
-    public void clearKey() {
-        key = null;
     }
 }

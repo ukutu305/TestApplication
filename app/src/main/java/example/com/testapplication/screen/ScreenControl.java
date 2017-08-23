@@ -6,11 +6,9 @@ package example.com.testapplication.screen;
  */
 interface ScreenControl {
 
-   void show(String key);
+    void show(String key);
 
-   void clear();
+    void clear();
 
-   String getKey();
-
-   void clearKey();
+    String getKey();
 }

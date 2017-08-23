@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (screenTransition != null)
-            screenTransition.clearKey();
+        screenTransition = null;
     }
 }
