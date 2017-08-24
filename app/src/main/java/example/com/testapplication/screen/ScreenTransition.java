@@ -21,15 +21,11 @@ public class ScreenTransition implements ScreenControl {
 
     private String key;
 
-    private Activity activity;
-
     public ScreenTransition(Activity activity) {
 
         for (ScreenFragmentEnum screenFragmentEnum : ScreenFragmentEnum.values()) {
             putMapFragment(screenFragmentEnum.getScreenFragment());
         }
-
-        this.activity = activity;
 
         fragmentManager = activity.getFragmentManager();
 
@@ -46,6 +42,17 @@ public class ScreenTransition implements ScreenControl {
         for (String key : map.keySet()) {
             ScreenFragment screenFragment = map.get(key);
             screenFragment.setScreenTransition(this);
+        }
+    }
+
+    @Override
+    public void showOnResume(String screenKeySaveInstanceState, String screenKeyOnPause) {
+        if (screenKeySaveInstanceState != null) {
+            show(screenKeySaveInstanceState);
+        } else if (screenKeyOnPause != null) {
+            show(screenKeyOnPause);
+        } else {
+            show(ScreenFragmentEnum.OPENING.getKey());
         }
     }
 

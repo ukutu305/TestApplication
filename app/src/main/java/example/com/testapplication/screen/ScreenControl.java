@@ -6,6 +6,8 @@ package example.com.testapplication.screen;
  */
 interface ScreenControl {
 
+    void showOnResume(String screenKeySaveInstanceState, String screenKeyOnPause);
+
     void show(String key);
 
     void clear();

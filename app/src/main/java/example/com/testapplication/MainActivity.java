@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import example.com.testapplication.screen.FullScreen;
-import example.com.testapplication.screen.ScreenFragmentEnum;
 import example.com.testapplication.screen.ScreenTransition;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,16 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         FullScreen.start(this);
 
-        if (screenTransition == null)
-            screenTransition = new ScreenTransition(this);
-
-        if (screenKeySaveInstanceState != null) {
-            screenTransition.show(screenKeySaveInstanceState);
-        } else if (screenKeyOnPause != null) {
-            screenTransition.show(screenKeyOnPause);
-        } else {
-            screenTransition.show(ScreenFragmentEnum.OPENING.getKey());
-        }
+        screenTransition = new ScreenTransition(this);
+        screenTransition.showOnResume(screenKeySaveInstanceState, screenKeyOnPause);
         screenKeySaveInstanceState = null;
         screenKeyOnPause = null;
     }
@@ -54,17 +45,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (screenTransition != null) {
-            screenKeyOnPause = screenTransition.getKey();
-            screenTransition.clear();
-        }
+        screenKeyOnPause = screenTransition.getKey();
+        screenTransition.clear();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (screenTransition != null)
-            outState.putString("screenKeySaveInstanceState", screenTransition.getKey());
+        outState.putString("screenKeySaveInstanceState", screenTransition.getKey());
 
     }
 
