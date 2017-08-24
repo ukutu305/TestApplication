@@ -11,13 +11,10 @@ import android.view.View;
  */
 public class FullScreen {
 
-    private final View view;
-
-    private final int visibility;
-
-    public FullScreen(Activity activity) {
-        this.view = activity.getWindow().getDecorView();
+    public static void start(Activity activity) {
+        View view = activity.getWindow().getDecorView();
         int apiInt = Build.VERSION.SDK_INT;
+        int visibility;
         if (apiInt >= Build.VERSION_CODES.KITKAT) {
             visibility = getVisibilityKitkat();
         } else if (apiInt >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -25,31 +22,19 @@ public class FullScreen {
         } else {
             visibility = 0;
         }
+        view.setSystemUiVisibility(visibility);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private int getVisibilityKitkat() {
+    private static int getVisibilityKitkat() {
         return View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private int getVisibilityJellyBean() {
+    private static int getVisibilityJellyBean() {
         return View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-    }
-
-    public void startFullScreen() {
-        if (view != null) {
-            view.setSystemUiVisibility(visibility);
-        }
-    }
-
-    public void startFullScreen(int nowVisibility) {
-        if ((nowVisibility != visibility)
-                && (view != null)) {
-            view.setSystemUiVisibility(visibility);
-        }
     }
 }

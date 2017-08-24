@@ -9,8 +9,6 @@ import example.com.testapplication.screen.ScreenTransition;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FullScreen fullScreen;
-
     private ScreenTransition screenTransition;
 
     private String screenKeySaveInstanceState;
@@ -36,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (fullScreen == null)
-            fullScreen = new FullScreen(this);
 
-        fullScreen.startFullScreen();
+        FullScreen.start(this);
 
         if (screenTransition == null)
             screenTransition = new ScreenTransition(this);
