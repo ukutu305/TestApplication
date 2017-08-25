@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import example.com.testapplication.R;
+import example.com.testapplication.data.FacadeData;
 
 /**
  * 画面遷移のクラス
@@ -17,11 +18,11 @@ public class ScreenTransition implements ScreenControl {
 
     private FragmentManager fragmentManager;
 
-    private Map<String, ScreenFragment> map = new HashMap<>();
+    private Map<String, ScreenFragment> map = new HashMap<>(ScreenFragmentEnum.values().length);
 
     private String key;
 
-    public ScreenTransition(Activity activity) {
+    public ScreenTransition(Activity activity, FacadeData facadeData) {
 
         for (ScreenFragmentEnum screenFragmentEnum : ScreenFragmentEnum.values()) {
             putMapFragment(screenFragmentEnum.getScreenFragment());
@@ -31,17 +32,18 @@ public class ScreenTransition implements ScreenControl {
 
         key = null;
 
-        initializeScreenFragments();
+        initializeScreenFragments(facadeData);
     }
 
     private void putMapFragment(ScreenFragment screenFragment) {
         map.put(screenFragment.getClass().getSimpleName(), screenFragment);
     }
 
-    private void initializeScreenFragments() {
+    private void initializeScreenFragments(FacadeData facadeData) {
         for (String key : map.keySet()) {
             ScreenFragment screenFragment = map.get(key);
             screenFragment.setScreenTransition(this);
+            screenFragment.setFacadeData(facadeData);
         }
     }
 

@@ -3,6 +3,7 @@ package example.com.testapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import example.com.testapplication.data.FacadeData;
 import example.com.testapplication.screen.FullScreen;
 import example.com.testapplication.screen.ScreenTransition;
 
@@ -14,10 +15,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String screenKeyOnPause;
 
+    private FacadeData facadeData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        facadeData = new FacadeData(this);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         FullScreen.start(this);
 
-        screenTransition = new ScreenTransition(this);
+        screenTransition = new ScreenTransition(this, facadeData);
         screenTransition.showOnResume(screenKeySaveInstanceState, screenKeyOnPause);
         screenKeySaveInstanceState = null;
         screenKeyOnPause = null;
